@@ -1,0 +1,15 @@
+name: Step Summary
+on:
+  workflow_dispatch:
+
+jobs:
+  step_summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step Summary
+        run: |
+          echo "### Step Summary" >> $GITHUB_STEP_SUMMARY
+          echo "#### Steps" >> $GITHUB_STEP_SUMMARY
+          echo "```json" >> $GITHUB_STEP_SUMMARY
+          echo "${{ toJson(github.event) }}" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY

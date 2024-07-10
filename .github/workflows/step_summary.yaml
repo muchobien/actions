@@ -6,10 +6,16 @@ jobs:
   step_summary:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate radom file of lorem ipsum of 1000 characters
+        run: |
+          curl -s https://www.lipsum.com/feed/json | jq -r '.feed.lipsum' > random.txt
       - name: Step Summary
         run: |
           echo "### Step Summary" >> $GITHUB_STEP_SUMMARY
           echo "#### Steps" >> $GITHUB_STEP_SUMMARY
-          echo "```json" >> $GITHUB_STEP_SUMMARY
-          echo "${{ toJson(github.event) }}" >> $GITHUB_STEP_SUMMARY
+          echo "```diff" >> $GITHUB_STEP_SUMMARY
+          git diff HEAD >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY

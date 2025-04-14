@@ -1,0 +1,11 @@
+name: Schedule
+on:
+  schedule:
+    - cron: '*/5 * * * *' # This will run every day at midnight UTC
+
+jobs:
+  view:
+    runs-on: ubuntu-latest
+    steps:
+      - name: View github context
+        run: echo "${{ toJson(github) }}"
